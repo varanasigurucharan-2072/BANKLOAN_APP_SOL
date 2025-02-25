@@ -86,10 +86,11 @@ namespace BANKLOAN_APP_BO_LIB.Models
                 BANKLOAN_APP_DA_LIB.Models.Repayment r = new BANKLOAN_APP_DA_LIB.Models.Repayment()
                 {
                     RepaymentId = repayment.RepaymentId,
-                    ApplicationId= Int32.Parse(Console.ReadLine()),
+                    ApplicationId = Int32.Parse(Console.ReadLine()),
                     DueDate = DateTime.Parse(Console.ReadLine()),
                     AmountDue = Decimal.Parse(Console.ReadLine()),
                     PaymentDate = DateTime.Parse(Console.ReadLine()),
+                    PaymentStatus = Console.ReadLine()
                 };
                 bool b = repayRepo.Update(r);
                 if (b)
@@ -221,7 +222,7 @@ namespace BANKLOAN_APP_BO_LIB.Models
         public static void ShowRepayment()
         {
             var repayment = repayRepo.GetAll();
-            Console.WriteLine("{0,10}{1,10}{2,10}{3,10}{4,10}{5,10}", "RepaymentId", "ApplicationId", "DueDate", "AmountDue", "PaymentDate","PaymentStatus");
+            Console.WriteLine("{0,10}{1,10}{2,10}{3,10}{4,10}{5,10}", "RepaymentId", "ApplicationId", "DueDate", "AmountDue", "PaymentDate", "PaymentStatus");
             foreach (var r in repayment)
             {
                 Console.WriteLine(r);

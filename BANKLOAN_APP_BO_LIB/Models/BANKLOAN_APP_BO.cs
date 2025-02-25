@@ -12,6 +12,7 @@ namespace BANKLOAN_APP_BO_LIB.Models
         static CustomerRepository custRepo = new CustomerRepository();
         static LoanProductRepository loanPRepo = new LoanProductRepository();
         static RepaymentRepository repayRepo = new RepaymentRepository();
+        static LoanApplicationRepository loanAppRepo = new LoanApplicationRepository();
         public static void UpdateCustomer(string customerId)
         {
             var Customer = custRepo.GetById(customerId);
@@ -104,6 +105,36 @@ namespace BANKLOAN_APP_BO_LIB.Models
 
             }
         }
+        public static void UpdateLoanApplication(string loanAppId)
+        {
+            var loanApp = loanAppRepo.GetById(loanAppId);
+            if (loanApp == null)
+            {
+                Console.WriteLine("LoanApplication not found");
+            }
+            else
+            {
+                Console.WriteLine("Enter the customer id, loan product id, loan amount, tenure, status, date:");
+                BANKLOAN_APP_DA_LIB.Models.LoanApplication l = new BANKLOAN_APP_DA_LIB.Models.LoanApplication()
+                {
+                    ApplicationId = loanApp.ApplicationId,
+                    CustomerId = Convert.ToInt32(Console.ReadLine()),
+                    LoanProductId = Convert.ToInt32(Console.ReadLine()),
+                    LoanAmount = Decimal.Parse(Console.ReadLine()),
+                    ApplicationDate = DateTime.Parse(Console.ReadLine()),
+                    ApprovalStatus = Console.ReadLine()
+                };
+                bool b = loanAppRepo.Update(l);
+                if (b)
+                {
+                    Console.WriteLine("LoanApplication updated successfully");
+                }
+                else
+                {
+                    Console.WriteLine("LoanApplication not updated");
+                }
+            }
+        }
         public static void RemoveCustomer(string custId)
         {
             var Customer = custRepo.GetById(custId);
@@ -165,6 +196,26 @@ namespace BANKLOAN_APP_BO_LIB.Models
                 }
             }
         }
+        public static void RemoveLoanApplication(string loanAppId)
+        {
+            var loanApp = loanAppRepo.GetById(loanAppId);
+            if (loanApp == null)
+            {
+                Console.WriteLine("LoanApplication not found");
+            }
+            else
+            {
+                bool b = loanAppRepo.Delete(loanApp);
+                if (b)
+                {
+                    Console.WriteLine("LoanApplication deleted successfully");
+                }
+                else
+                {
+                    Console.WriteLine("LoanApplication not deleted");
+                }
+            }
+        }
         public static void SearchCustomer(string custId)
         {
             var Customer = custRepo.GetById(custId);
@@ -201,6 +252,18 @@ namespace BANKLOAN_APP_BO_LIB.Models
                 Console.WriteLine(repayment);
             }
         }
+        public static void SearchLoanApplication(string loanAppId)
+        {
+            var loanApp = loanAppRepo.GetById(loanAppId);
+            if (loanApp == null)
+            {
+                Console.WriteLine("LoanApplication not found");
+            }
+            else
+            {
+                Console.WriteLine(loanApp);
+            }
+        }
         public static void ShowCustomer()
         {
             var Customer = custRepo.GetAll();
@@ -226,6 +289,15 @@ namespace BANKLOAN_APP_BO_LIB.Models
             foreach (var r in repayment)
             {
                 Console.WriteLine(r);
+            }
+        }
+        public static void ShowLoanApplication()
+        {
+            var loanApp = loanAppRepo.GetAll();
+            Console.WriteLine("{0,10}{1,10}{2,15}{3,15}{4,15}{5,15}", "ApplicationId", "CustomerId", "LoanProductId", "LoanAmount", "ApplicationDate", "ApprovalStatus");
+            foreach (var l in loanApp)
+            {
+                Console.WriteLine(l);
             }
         }
         public static void AddCustomer()
@@ -290,6 +362,27 @@ namespace BANKLOAN_APP_BO_LIB.Models
             else
             {
                 Console.WriteLine("Repayment not added");
+            }
+        }
+        public static void AddLoanApplication()
+        {
+            Console.WriteLine("Enter the customer id, loan product id, loan amount, tenure, status, date:");
+            BANKLOAN_APP_DA_LIB.Models.LoanApplication l = new BANKLOAN_APP_DA_LIB.Models.LoanApplication()
+            {
+                CustomerId = Convert.ToInt32(Console.ReadLine()),
+                LoanProductId = Convert.ToInt32(Console.ReadLine()),
+                LoanAmount = Decimal.Parse(Console.ReadLine()),
+                ApplicationDate = DateTime.Parse(Console.ReadLine()),
+                ApprovalStatus = "PENDING"
+            };
+            bool b = loanAppRepo.Add(l);
+            if (b)
+            {
+                Console.WriteLine("LoanApplication added successfully");
+            }
+            else
+            {
+                Console.WriteLine("LoanApplication not added");
             }
         }
     }

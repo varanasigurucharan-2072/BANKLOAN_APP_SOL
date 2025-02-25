@@ -14,7 +14,7 @@ namespace BANKLOAN_APP_DA_LIB.Repositories
         {
             get
             {
-                return "Data Source=LTIN557127\\SQLEXPRESS;Initial Catalog=BANKLOAN_APP;Integrated Security=True;";
+                return "Data Source=LTIN557127\\SQLEXPRESS;Initial Catalog=BANKLOAN_APP;Integrated Security=True;TrustServerCertificate=True;";
             }
         }
         public bool Add(LoanApplication entity)
@@ -24,12 +24,12 @@ namespace BANKLOAN_APP_DA_LIB.Repositories
             {
                 SqlConnection con = new SqlConnection(ConnectionString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO Customer (@P1, @P2, @P3, @P4)", con);
+                SqlCommand cmd = new SqlCommand("INSERT INTO LoanApplication (customerId, loanProductId, loanAmount, applicationDate, approvalStatus) VALUES (@P1, @P2, @P3, @P4, @P5)", con);
                 cmd.Parameters.AddWithValue("@P1", entity.CustomerId);
                 cmd.Parameters.AddWithValue("@P2", entity.LoanProductId);
                 cmd.Parameters.AddWithValue("@P3", entity.LoanAmount);
-                cmd.Parameters.AddWithValue("@P3", entity.ApplicationDate);
-                cmd.Parameters.AddWithValue("@P4", entity.ApprovalStatus);
+                cmd.Parameters.AddWithValue("@P4", entity.ApplicationDate);
+                cmd.Parameters.AddWithValue("@P5", entity.ApprovalStatus);
 
 
                 int r = cmd.ExecuteNonQuery();
@@ -56,7 +56,7 @@ namespace BANKLOAN_APP_DA_LIB.Repositories
             {
                 SqlConnection con = new SqlConnection(ConnectionString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("DELETE FROM LoanApplication WHERE LoanApplicationId = @P", con);
+                SqlCommand cmd = new SqlCommand("DELETE FROM LoanApplication WHERE applicationId = @P", con);
                 cmd.Parameters.AddWithValue("@P", entity.ApplicationId);
                 int r = cmd.ExecuteNonQuery();
                 if (r > 0)
@@ -84,12 +84,12 @@ namespace BANKLOAN_APP_DA_LIB.Repositories
             {
                 LoanApplication c = new LoanApplication()
                 {
-                    ApplicationId = Int32.Parse((string)sqlDr[0]),
-                    CustomerId = Int32.Parse((string)sqlDr[2]),
-                    LoanProductId = Int32.Parse((string)sqlDr[3]),
-                    LoanAmount = Decimal.Parse((string)sqlDr[4]),
-                    ApplicationDate = DateTime.Parse((string)sqlDr[5]),
-                    ApprovalStatus = sqlDr[6].ToString()
+                    ApplicationId = Int32.Parse(sqlDr[0].ToString()),
+                    CustomerId = Int32.Parse(sqlDr[1].ToString()),
+                    LoanProductId = Int32.Parse(sqlDr[2].ToString()),
+                    LoanAmount = Decimal.Parse(sqlDr[3].ToString()),
+                    ApplicationDate = DateTime.Parse(sqlDr[4].ToString()),
+                    ApprovalStatus = sqlDr[5].ToString()
                 };
                 LoanApplication.Add(c);
             }

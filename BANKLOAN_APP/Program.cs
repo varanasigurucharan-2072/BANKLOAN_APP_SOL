@@ -27,7 +27,12 @@ namespace BANKLOAN_APP
                 Console.WriteLine("13.search repayment");
                 Console.WriteLine("14.modify repayment");
                 Console.WriteLine("15.delete repayment");
-                Console.WriteLine("16.exit");
+                Console.WriteLine("16.Add Loan Application");
+                Console.WriteLine("17.Display Loan Application");
+                Console.WriteLine("18.Search Loan Application");
+                Console.WriteLine("19.Modify Loan Application");
+                Console.WriteLine("20.Delete Loan Application");
+                Console.WriteLine("21.exit");
                 Console.WriteLine("enter your choice");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -94,6 +99,30 @@ namespace BANKLOAN_APP
                         Console.WriteLine("Enter Repayment Id:");
                         string repaymentId2 = Console.ReadLine();
                         BANKLOAN_APP_BO.RemoveRepayment(repaymentId2);
+                        break;
+                    case 16:
+                        BANKLOAN_APP_BO.AddLoanApplication();
+                        break;
+                    case 17:
+                        BANKLOAN_APP_BO.ShowLoanApplication();
+                        break;
+                    case 18:
+                        Console.WriteLine("Enter Application Id:");
+                        string applicationId = Console.ReadLine();
+                        BANKLOAN_APP_BO.SearchLoanApplication(applicationId);
+                        break;
+                    case 19:
+                        Console.WriteLine("Enter Application Id:");
+                        string applicationId1 = Console.ReadLine();
+                        BANKLOAN_APP_BO.UpdateLoanApplication(applicationId1);
+                        break;
+                    case 20:
+                        Console.WriteLine("Enter Application Id:");
+                        string applicationId2 = Console.ReadLine();
+                        BANKLOAN_APP_BO.RemoveLoanApplication(applicationId2);
+                        break;
+                    case 21:
+                        Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("invalid choice");

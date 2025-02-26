@@ -53,7 +53,7 @@ namespace BANKLOAN_APP_BO_LIB.Models
             }
             else
             {
-                Console.WriteLine("Enter the product name, interest rate, duration, max amount, min amount:");
+                Console.WriteLine("Enter the product name, interest rate, Tenure, max amount, min amount:");
                 BANKLOAN_APP_DA_LIB.Models.LoanProduct l = new BANKLOAN_APP_DA_LIB.Models.LoanProduct()
                 {
                     LoanProductId = LoanProduct.LoanProductId,
@@ -83,7 +83,7 @@ namespace BANKLOAN_APP_BO_LIB.Models
             }
             else
             {
-                Console.WriteLine("Enter the Appication Id, due date, due amount, amount, payment date :");
+                Console.WriteLine("Enter the Appication Id, due date, due amount, amountdue, payment date, payment status :");
                 BANKLOAN_APP_DA_LIB.Models.Repayment r = new BANKLOAN_APP_DA_LIB.Models.Repayment()
                 {
                     RepaymentId = repayment.RepaymentId,
@@ -114,7 +114,7 @@ namespace BANKLOAN_APP_BO_LIB.Models
             }
             else
             {
-                Console.WriteLine("Enter the customer id, loan product id, loan amount, tenure, status, date:");
+                Console.WriteLine("Enter the customer id, loan product id, loan amount, tenure, application date,application status:");
                 BANKLOAN_APP_DA_LIB.Models.LoanApplication l = new BANKLOAN_APP_DA_LIB.Models.LoanApplication()
                 {
                     ApplicationId = loanApp.ApplicationId,
@@ -300,7 +300,7 @@ namespace BANKLOAN_APP_BO_LIB.Models
                 Console.WriteLine(l);
             }
         }
-        public static void AddCustomer()
+        public static void RegisterCustomer()
         {
             Console.WriteLine("Enter the name, email, phone, address, password:");
             BANKLOAN_APP_DA_LIB.Models.Customer c = new BANKLOAN_APP_DA_LIB.Models.Customer()
@@ -345,7 +345,7 @@ namespace BANKLOAN_APP_BO_LIB.Models
         }
         public static void AddRepayment()
         {
-            Console.WriteLine("Enter the Appication Id, due date, due amount, amount, payment date :");
+            Console.WriteLine("Enter the Appication Id, due date, amount due, payment date :");
             BANKLOAN_APP_DA_LIB.Models.Repayment r = new BANKLOAN_APP_DA_LIB.Models.Repayment()
             {
                 ApplicationId = Int32.Parse(Console.ReadLine()),
